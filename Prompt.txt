@@ -1,0 +1,312 @@
+You are working inside my local project directory using Codex CLI. Build the initial project structure and a polished, runnable first version of an English-language competition website for NUS SDS Datathon 2026.
+
+Implement the project, rather than only suggesting an architecture or returning example code.
+
+## 1. Project context
+
+The project directory is initially empty, apart from any reference assets or instructions I may have added.
+
+The website should:
+- Introduce the competition clearly.
+- Present event information and important dates.
+- Direct visitors to an external registration form once I provide its URL.
+- Be easy for me to maintain and expand.
+- Accommodate a future team finder feature without implementing it now.
+
+This phase is a public event website. Do not implement authentication, databases, registration forms, dashboards, chat, team management, or team finder functionality.
+
+All visitor-facing text must be in English. You may explain your implementation and handoff to me in Vietnamese.
+
+## 2. Technology decisions
+
+Use:
+- Next.js with App Router.
+- React and TypeScript with strict type checking.
+- Tailwind CSS.
+- Node.js using an actively supported LTS version compatible with the chosen Next.js release.
+- npm, with a committed package-lock.json.
+- ESLint using configuration compatible with the installed Next.js version.
+- Lucide React only if icons are useful.
+
+Check the current official documentation and select compatible stable versions. Do not use canary or experimental releases.
+
+Use a single application, not a monorepo or separate Express backend.
+
+Prefer Server Components. Use Client Components only where interaction requires them, such as the mobile navigation.
+
+Avoid unnecessary dependencies, global state libraries, animation libraries, CMS integration, and abstraction layers.
+
+Use CSS for subtle transitions. The initial website must run without API keys, cloud accounts, or external services.
+
+## 3. Reference websites
+
+Review these websites if your tools allow it:
+- https://lifehack2026.nuscomputing.com/
+- https://nebulax.com.sg/
+
+Focus on:
+- Navigation and content hierarchy.
+- Event information layout.
+- Button shape, spacing, hover, and focus treatments.
+- Consistent colors and typography.
+- Professional presentation and responsive behavior.
+
+Use them as design references, not templates to copy. Do not reuse their branding, text, images, or event details.
+
+If you cannot inspect a reference, state that limitation and continue using this brief. Do not claim to have reviewed a page you could not access.
+
+## 4. Event content
+
+Use the following supplied information:
+
+- Event name: NUS SDS Datathon 2026.
+- Short display name: NUS Datathon 2026.
+- Organizer display name: NUS SDS.
+- Audience: undergraduate students from universities across Singapore.
+- Event dates: 17 January 2026 to 7 February 2026.
+- Registration deadline: 14 January 2026.
+- Venue: NUS Lecture Theatre.
+- Prizes: prizes worth up to SGD 1,000.
+- Activities: tackling real-world problems with data, collaboration, guided workshops, and practical experience with datasets.
+- Experience level: beginners and experienced participants are welcome.
+- Contact email: statistics.society@u.nus.edu.
+- Instagram: https://www.instagram.com/nus.sds/
+- Source post: https://www.instagram.com/p/DSr84_4EtkO/
+
+Keep these historical dates unchanged. I will edit the content later.
+
+Do not fabricate:
+- Specific lecture theatre numbers.
+- Team sizes.
+- Detailed workshop schedules.
+- Sponsors, judges, speakers, or partners.
+- Prize allocations or a guaranteed first-place prize of SGD 1,000.
+- Participation fees.
+- Rules, judging criteria, or dataset details.
+- Testimonials or participation statistics.
+
+Do not include outdated urgency messaging, countdown timers, “registration is open” claims, or early-bird merchandise promotions.
+
+Do not use the registration URL from the original poster. I will supply a new URL later.
+
+## 5. Registration behavior
+
+Keep registration settings together in the event configuration:
+- registrationUrl: null initially.
+- registrationStatus: "unavailable" initially.
+- Supported statuses: "unavailable", "open", and "closed".
+
+Use one reusable RegistrationCTA component everywhere.
+
+Required behavior:
+- Missing URL: show a clearly disabled “Registration unavailable” control with no navigation.
+- Closed status: show a disabled “Registration closed” control.
+- Open status with a valid HTTP(S) URL: show an active “Register now” link.
+- An unavailable or invalid destination must never result in href="#", an empty link, a broken page, or a fake form.
+- If the external link opens a new tab, include appropriate rel attributes and an accessible indication.
+
+The default state must not imply that registration will open soon. Do not automatically change event dates or registration status based on today’s date.
+
+Document exactly how to update the URL and status.
+
+## 6. Visual direction
+
+Create a professional university competition identity that feels carefully designed and specific to this event.
+
+The supplied SDS logo is a geometric cube in yellow, amber/orange, and black. Use this as the primary branding cue.
+
+Suggested palette:
+- Charcoal: #171717.
+- Warm off-white: #FAF9F6.
+- Primary yellow: #F5CF24.
+- Amber accent: #E99A00.
+- Muted gray for secondary text and borders.
+
+Treat these as starting design tokens, not pixel-exact sampled brand colors. Ensure accessible contrast, especially around yellow buttons.
+
+Design requirements:
+- Strong typography, clear hierarchy, and generous spacing.
+- A restrained dark hero with warm light content sections.
+- Yellow used selectively for emphasis and primary actions.
+- Consistent button dimensions, corner radius, borders, and interaction states.
+- Dark text on yellow buttons.
+- An editorial layout mixing typography, section dividers, and compact event details.
+- A subtle data-inspired grid or geometric motif is acceptable if it supports the content.
+- A compact organizer logo that preserves its original aspect ratio.
+- If the logo has a white background, place it intentionally on a light surface. Do not recolor, distort, or recreate it.
+
+Avoid generic AI-generated landing-page styling:
+- No purple/blue gradient blobs.
+- No excessive glow, glassmorphism, floating cards, or neon effects.
+- No emoji feature icons.
+- No repetitive grids of identical cards for every section.
+- No oversized empty areas or unnecessary decorative animation.
+- No generic SaaS copy, fabricated social proof, or dashboard screenshots.
+- No stock photography unrelated to the event.
+
+Use a clean font stack that works without downloading fonts at build time. Do not depend on remote font services for a successful build.
+
+## 7. Page structure
+
+Build one complete landing page at `/` with:
+
+1. Header
+   - Organizer identity.
+   - Anchor links to About, Key Dates, and FAQ.
+   - Registration CTA.
+   - Accessible mobile navigation.
+
+2. Hero
+   - NUS SDS Datathon 2026.
+   - Short, specific copy about solving real-world problems through data.
+   - Dates and Singapore undergraduate audience.
+   - Registration CTA.
+   - A working “Explore the event” anchor link.
+
+3. Event overview
+   - Concise explanation of the competition.
+   - Collaboration, practical learning, and guided workshops.
+   - Compact factual details for dates, venue, audience, and prizes.
+
+4. What to expect
+   - Real-world data challenges.
+   - Guided learning.
+   - Collaboration with fellow university students.
+   - Use a considered layout rather than an automatic three-card template.
+
+5. Key dates
+   - Registration deadline: 14 January 2026.
+   - Event begins: 17 January 2026.
+   - Event concludes: 7 February 2026.
+   - No invented daily schedule.
+
+6. Prizes
+   - “Prizes worth up to SGD 1,000.”
+   - No invented prize breakdown.
+
+7. FAQ
+   - Only questions answerable from the provided facts.
+   - Suggested topics: eligibility, experience level, dates, venue, registration availability, contact.
+   - Use accessible native details/summary if suitable.
+
+8. Closing registration section
+   - Reuse the configured RegistrationCTA.
+   - Include a working contact link.
+
+9. Footer
+   - NUS SDS organizer identity.
+   - Email and Instagram links.
+   - Concise event identification.
+
+Do not show Team Finder in public navigation yet. Document it as a future phase instead.
+
+## 8. Project organization
+
+Use a practical structure along these lines, adapting filenames where necessary:
+
+- src/app/layout.tsx
+- src/app/page.tsx
+- src/app/globals.css
+- src/app/not-found.tsx
+- src/components/layout/site-header.tsx
+- src/components/layout/site-footer.tsx
+- src/components/ui/button.tsx
+- src/components/ui/container.tsx
+- src/components/ui/section-heading.tsx
+- src/features/event/components/
+- src/features/event/components/registration-cta.tsx
+- src/features/event/config.ts
+- src/features/event/types.ts
+- public/images/
+- docs/architecture.md
+- docs/content-editing.md
+- docs/roadmap.md
+- README.md
+
+Create only useful files and abstractions. Do not create empty service, repository, API, or team-finder directories.
+
+Keep event-specific content and registration settings in typed configuration rather than scattering them throughout JSX.
+
+Prefer date-only values for dates where no time was supplied. Avoid timezone conversion bugs that shift a date by one day.
+
+Use CSS custom properties for shared colors, spacing, radii, and typography where appropriate.
+
+The roadmap should briefly explain how a future `/team-finder` route and `src/features/team-finder` module could introduce authentication and persistence later. Do not choose or install those services now.
+
+## 9. Assets
+
+Check for locally supplied reference files, particularly:
+- references/sds-logo.png
+- references/event-poster.png
+
+If the logo is available, use it and place the production asset under public/images with a meaningful filename.
+
+The poster is a content reference, not a full-page website background. Do not reproduce Instagram interface elements.
+
+If no usable logo is available:
+- Use a simple text identity reading “NUS SDS”.
+- Keep the header layout complete.
+- Document where to add the logo later.
+- Do not draw a replacement official logo or leave a broken image.
+
+Do not assume images from another chat exist on this computer.
+
+## 10. Accessibility, performance, and metadata
+
+Include:
+- Semantic landmarks and one main h1.
+- Logical heading order.
+- Skip-to-content link.
+- Visible keyboard focus.
+- Accessible mobile menu with correct expanded state.
+- Escape-to-close and sensible focus handling for the menu.
+- Comfortable mobile touch targets.
+- Reduced-motion support.
+- No horizontal overflow at mobile widths.
+- Appropriate image alt text and dimensions.
+- Page title, description, and basic Open Graph text metadata.
+
+Do not invent a production domain, canonical URL, or social preview image URL. Document these as deployment configuration to add later.
+
+Keep JavaScript and assets lightweight.
+
+## 11. Execution workflow
+
+1. Inspect the directory and read applicable AGENTS.md instructions.
+2. Preserve any existing files and reference assets.
+3. Briefly state the implementation plan.
+4. Initialize the project directly in the current directory, without an unnecessary nested application folder.
+5. Implement the structure and complete landing page.
+6. Add npm scripts for dev, build, start, lint, and typecheck using commands supported by the installed versions.
+7. Run lint, typecheck, and the production build.
+8. Fix issues introduced by the implementation.
+9. If browser tools are available, inspect desktop and mobile layouts and check navigation, FAQ, CTA states, and overflow.
+10. If a check is blocked, report the exact limitation rather than claiming it passed.
+
+Add small behavioral tests for registration CTA state handling if practical. Avoid snapshot-heavy tests or a large testing framework setup just for static content.
+
+Do not deploy, publish, or connect paid services.
+
+Proceed with the decisions in this brief. Ask a question only if an actual blocker cannot be safely resolved from these instructions.
+
+## 12. Documentation and handoff
+
+README.md should explain:
+- Prerequisites and the selected Node.js version.
+- Installation and local development.
+- Build and production start.
+- Lint and typecheck.
+- Main project structure.
+- Where to change content, dates, colors, and logo.
+- How to configure the registration URL and status.
+- What remains outside this phase.
+
+At completion, summarize in Vietnamese:
+- What was implemented.
+- The main folders and their responsibilities.
+- Commands to run the project.
+- Exact files to edit for content and registration.
+- Checks performed and their results.
+- Missing assets or known limitations.
+
+Success means the project has a coherent structure and a polished first page that runs locally. It must remain straightforward to edit, with no fake features, invented event facts, or unnecessary backend infrastructure.
