@@ -25,5 +25,8 @@ export interface EventConfig extends RegistrationSettings {
   expectations: { title: string; items: { title: string; description: string }[] };
   milestones: { label: string; date: string; description: string }[];
   faq: { question: string; answer: string }[];
+  registrationQuestion: string;
+  registrationMessages: Record<RegistrationStatus, string>;
+  contactQuestion: string;
   closing: { title: string; intro: string; contactLabel: string };
 }

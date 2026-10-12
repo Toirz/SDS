@@ -5,6 +5,7 @@ const dates = {
   end: "2026-02-07",
   registrationDeadline: "2026-01-14",
 };
+const prizeAmount = "1,000";
 
 export const event: EventConfig = {
   name: "NUS SDS Datathon 2026",
@@ -22,8 +23,8 @@ export const event: EventConfig = {
   venue: "NUS Lecture Theatre",
   dates,
   prizes: {
-    statement: "Prizes worth up to SGD 1,000.",
-    amount: "1,000",
+    statement: `Prizes worth up to SGD ${prizeAmount}.`,
+    amount: prizeAmount,
     currency: "SGD",
     intro: "Bring your curiosity. Put your ideas to work.",
   },
@@ -64,9 +65,16 @@ export const event: EventConfig = {
   faq: [
     { question: "Who can participate?", answer: "The competition is for undergraduate students from universities across Singapore." },
     { question: "Do I need experience with data?", answer: "Beginners and experienced participants are welcome. The event includes guided workshops and practical experience with datasets." },
-    { question: "When does the event take place?", answer: "The event runs from 17 January 2026 to 7 February 2026. The supplied registration deadline is 14 January 2026." },
+    { question: "When does the event take place?", answer: `The event runs from ${formatEventDate(dates.start)} to ${formatEventDate(dates.end)}. The registration deadline is ${formatEventDate(dates.registrationDeadline)}.` },
     { question: "Where is the event held?", answer: "The venue is NUS Lecture Theatre." },
   ],
+  registrationQuestion: "How can I register?",
+  registrationMessages: {
+    unavailable: "Registration is unavailable through this website. Please contact NUS SDS for registration enquiries.",
+    open: "Use the registration link to visit the external registration form. It opens in a new tab.",
+    closed: "Registration is closed. Please contact NUS SDS if you have questions.",
+  },
+  contactQuestion: "How can I contact the organisers?",
   closing: {
     title: "Great questions start here.",
     intro: "Explore the event, bring your curiosity and connect with NUS SDS for more information.",

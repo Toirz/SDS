@@ -9,7 +9,7 @@ export function SiteFooter() {
         <div className="footer-top">
           <div className="brand">
             <span className="brand-logo"><Image src={event.logo.src} alt={event.logo.alt} width={event.logo.width} height={event.logo.height} sizes="48px" /></span>
-            <span className="brand-text"><strong>{event.organizer}</strong><span>Ideas grounded in data.</span></span>
+            <span className="brand-text"><strong>{event.organizer}</strong><span>{event.hero.eyebrow}</span></span>
           </div>
           <div className="footer-links">
             <a href={`mailto:${event.contactEmail}`}>{event.contactEmail}<span aria-hidden="true">↗</span></a>
