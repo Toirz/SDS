@@ -36,6 +36,8 @@ npm run build
 npm run start
 ```
 
+`npm run start` phục vụ bản production tại **http://localhost:3000**. Sau khi cập nhật và build lại, dừng server cũ bằng `Ctrl+C` rồi chạy lại `npm run start`; server đang chạy có thể giữ HTML của build cũ và yêu cầu các file CSS/JS không còn tồn tại. Bản thiết kế đã duyệt được cập nhật tại cổng 3000; đây là triển khai trên máy local.
+
 ## Cấu trúc chính
 
 ```text
@@ -68,7 +70,7 @@ registrationStatus: "open",
 
 Đóng đăng ký bằng `registrationStatus: "closed"`. Trạng thái đóng luôn ưu tiên; URL thiếu hoặc không hợp lệ luôn vô hiệu hóa CTA. Tất cả CTA dùng `RegistrationCTA`, link hoạt động mở tab mới và có thông báo cho trình đọc màn hình. **Không tự đổi trạng thái theo ngày hiện tại.** Trong production cần build lại sau khi sửa cấu hình.
 
-Màu, font hệ thống, spacing và radius nằm ở đầu **`src/app/globals.css`**. Logo production là **`public/images/sds-logo.jpg`**, được sao chép nguyên bản từ `References/sds_logo.jpg`. Khi thay logo, cập nhật cả đường dẫn, kích thước và alt text trong cấu hình; giữ tỷ lệ gốc và đặt logo có nền trắng trên nền sáng.
+Màu, font, spacing và radius nằm ở đầu **`src/app/globals.css`**. Giao diện dùng nền trắng, chữ đen và điểm nhấn vàng, với typography và khoảng trắng tham khảo [Notion](https://www.notion.com/). Font [Inter](https://rsms.me/inter/) được lưu tại **`public/fonts/InterVariable.woff2`**, kèm giấy phép **`public/fonts/Inter-LICENSE.txt`**; không tải font từ dịch vụ ngoài khi build hoặc xem trang. Logo production là **`public/images/sds-logo.jpg`**, được sao chép nguyên bản từ `References/sds_logo.jpg`. Khi thay logo, cập nhật cả đường dẫn, kích thước và alt text trong cấu hình; giữ tỷ lệ gốc và đặt logo có nền trắng trên nền sáng.
 
 ## Phạm vi và triển khai sau này
 
@@ -101,3 +103,7 @@ Ngày 12 October 2026:
 - Đã mở cả hai website tham khảo bằng Chromium. Công cụ kiểm tra browser được cài ngoài dự án, không thêm dependency chạy ứng dụng.
 
 Chưa kiểm tra Firefox/Safari hoặc thiết bị di động thật; chưa kiểm tra form đăng ký thực vì chưa có URL; chưa triển khai website.
+
+## Kiểm tra giao diện sau khi thiết kế lại
+
+Ngày 12 October 2026: Chromium tại 320, 390, 768, 1024 và 1440px không tràn ngang; Inter local tải thành công, nền trắng và tiêu đề weight 650. Menu desktop nằm giữa viewport, logo và đăng ký cách hai mép 24px; hover và nhấn giữ có nền xám. Section padding giảm còn 32–48px; chiều dài trang ở 1440px giảm từ khoảng 4.493px xuống khoảng 3.001px. Dates, venue, eligibility và prizes có ô riêng với icon, viền và highlight vàng. Menu, FAQ, điều hướng anchor, skip link, bàn phím, CTA không khả dụng và trang 404 đều đạt. Axe không phát hiện lỗi WCAG 2 A/AA hoặc 2.1 AA, kể cả menu và FAQ mở; không có lỗi console hoặc request thất bại. Giữ nguyên các giới hạn kiểm tra trình duyệt và triển khai ở trên.
