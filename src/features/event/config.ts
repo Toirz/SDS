@@ -58,7 +58,7 @@ export const event: EventConfig = {
     ],
   },
   milestones: [
-    { label: "Registration deadline", date: dates.registrationDeadline, description: "The supplied deadline for this edition." },
+    { label: "Registration deadline", date: dates.registrationDeadline, description: "Registration deadline for this edition." },
     { label: "Event begins", date: dates.start, description: "The start of NUS SDS Datathon 2026." },
     { label: "Event concludes", date: dates.end, description: "The final date of the competition." },
   ],
