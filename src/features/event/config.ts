@@ -31,8 +31,8 @@ export const event: EventConfig = {
   contactEmail: "statistics.society@u.nus.edu",
   instagramUrl: "https://www.instagram.com/nus.sds/",
   sourcePostUrl: "https://www.instagram.com/p/DSr84_4EtkO/",
-  registrationUrl: null,
-  registrationStatus: "unavailable",
+  registrationUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdu4_BHd9Aua3wc7cBTvlvC2P0KJeHwNw_lZVO8UYO1ft-jYg/viewform",
+  registrationStatus: "open",
   logo: {
     src: "/images/sds-logo.jpg",
     alt: "NUS SDS yellow and amber geometric cube logo",

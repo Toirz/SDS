@@ -24,7 +24,7 @@ Node.js 24 LTS and exact stable dependency versions are recorded in `.nvmrc`, `p
 
 ## Design contract
 
-The screen introduces the competition, makes dates and eligibility easy to find, and directs visitors to a real external form only when configured. Its default registration state is unavailable, with no implication of a future opening.
+The screen introduces the competition, makes dates and eligibility easy to find, and directs visitors to the user-supplied Google Form. Registration is explicitly configured as open; the header, mobile menu, hero, FAQ and closing section all use the same validated destination and open it in a new tab.
 
 The visual identity uses a white background, near-black text and yellow accents, inspired by [Notion](https://www.notion.com/). Inter headings use weight 650, tight letter spacing and compact line height; body text uses weight 400 with muted secondary copy. The full-width desktop header places the logo at the left edge, navigation at the viewport center and registration at the right edge. Navigation links have gray hover, keyboard-focus and pressed backgrounds. Section padding is 32–48px instead of 64–112px, and the hero illustration is smaller, especially on mobile. Dates, venue, eligibility and prizes appear in labeled panels with decorative icons and yellow top borders. Activities use three compact cards; milestone dates have pale-yellow highlights, and the prize panel uses a solid yellow background. The closing section is a compact horizontal layout that stacks on mobile. The geometric SVG is decorative; it represents no dataset or event statistics and does not recreate the SDS logo.
 

@@ -1,6 +1,6 @@
 # NUS SDS Datathon 2026
 
-Website sự kiện bằng tiếng Anh, xây dựng với Next.js App Router, React, TypeScript strict và Tailwind CSS. Nội dung giữ nguyên các mốc lịch sử năm 2026; đăng ký mặc định không khả dụng. Không cần API key, tài khoản cloud hay dịch vụ ngoài để chạy.
+Website sự kiện bằng tiếng Anh, xây dựng với Next.js App Router, React, TypeScript strict và Tailwind CSS. Nội dung giữ nguyên các mốc lịch sử năm 2026; các nút đăng ký mở Google Form do người dùng cung cấp. Không cần API key, tài khoản cloud hay dịch vụ ngoài để chạy.
 
 ## Chạy trên máy
 
@@ -57,16 +57,11 @@ Chỉnh **`src/features/event/config.ts`** để đổi nội dung, ngày, nơi 
 Đăng ký dùng hai trường trong cùng file:
 
 ```ts
-registrationUrl: null,
-registrationStatus: "unavailable",
-```
-
-Khi có URL đã xác minh, điền URL tuyệt đối bắt đầu bằng `https://` hoặc `http://`, rồi đổi trạng thái thành `"open"`. Ví dụ dưới đây chỉ minh họa, phải thay bằng URL thực:
-
-```ts
-registrationUrl: "https://example.com/your-registration-form",
+registrationUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdu4_BHd9Aua3wc7cBTvlvC2P0KJeHwNw_lZVO8UYO1ft-jYg/viewform",
 registrationStatus: "open",
 ```
+
+Khi thay form, điền URL tuyệt đối bắt đầu bằng `https://` hoặc `http://` và giữ trạng thái `"open"`. Vô hiệu hóa đăng ký bằng `registrationUrl: null` và `registrationStatus: "unavailable"`.
 
 Đóng đăng ký bằng `registrationStatus: "closed"`. Trạng thái đóng luôn ưu tiên; URL thiếu hoặc không hợp lệ luôn vô hiệu hóa CTA. Tất cả CTA dùng `RegistrationCTA`, link hoạt động mở tab mới và có thông báo cho trình đọc màn hình. **Không tự đổi trạng thái theo ngày hiện tại.** Trong production cần build lại sau khi sửa cấu hình.
 

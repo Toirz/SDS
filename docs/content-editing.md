@@ -43,7 +43,7 @@ Replace the sample with a real URL; do not paste the sample into production. Pre
 | `open` | Missing or invalid | Disabled “Registration unavailable” |
 | `open` | Valid HTTP(S) | “Register now” link, new tab, `noopener noreferrer`, accessible new-tab indication |
 
-To close, set the status to `closed`. To return to the default, use `registrationUrl: null` and `registrationStatus: "unavailable"`. Do not use `#`, an empty string, a fake form or the old poster's registration destination.
+To close, set the status to `closed`. To disable registration without marking it closed, use `registrationUrl: null` and `registrationStatus: "unavailable"`. Do not use `#`, an empty string, a fake form or the old poster's registration destination.
 
 `RegistrationCTA` is the only registration control implementation. Update its style once to update the header, mobile menu, hero, FAQ and closing section. The shared `.button` CSS also styles the ordinary event and return links.
 
