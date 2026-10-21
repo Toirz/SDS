@@ -14,7 +14,7 @@ export function EventOverview() {
     <section id="about" tabIndex={-1} className="section overview" aria-label="About the event">
       <Container>
         <div className="overview-grid">
-          <SectionHeading number="01" label="The event" title={event.overview.title} />
+          <SectionHeading title={event.overview.title} />
           <div className="overview-copy"><p className="lead">{event.overview.intro}</p><p>{event.overview.detail}</p></div>
         </div>
         <dl className="event-details">

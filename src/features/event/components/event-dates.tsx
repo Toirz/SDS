@@ -6,7 +6,7 @@ export function EventDates() {
   return (
     <section id="dates" tabIndex={-1} className="section dates" aria-label="Key dates">
       <Container>
-        <div className="dates-heading"><SectionHeading number="03" label="Key dates" title="Mark the milestones." /><p className="dates-note">The dates for the {event.year} edition.</p></div>
+        <div className="dates-heading"><SectionHeading title="Mark the milestones." /><p className="dates-note">The published competition dates.</p></div>
         <ol className="timeline">
           {event.milestones.map(({ label, date, description }, index) => (
             <li key={label}>

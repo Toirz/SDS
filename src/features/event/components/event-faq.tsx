@@ -2,6 +2,7 @@ import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { event } from "@/features/event/config";
 import { getRegistrationState } from "@/features/event/registration";
+import { FAQItem } from "./faq-item";
 import { RegistrationCTA } from "./registration-cta";
 
 export function EventFAQ() {
@@ -11,11 +12,11 @@ export function EventFAQ() {
   return (
     <section id="faq" tabIndex={-1} className="section faq" aria-label="Frequently asked questions">
       <Container className="faq-grid">
-        <SectionHeading number="04" label="FAQ" title="A few things to know." />
+        <SectionHeading title="A few things to know." />
         <div className="faq-list">
-          {event.faq.map(({ question, answer }) => <details key={question}><summary>{question}<span className="faq-plus" aria-hidden="true" /></summary><div className="faq-answer"><p>{answer}</p></div></details>)}
-          <details><summary>{event.registrationQuestion}<span className="faq-plus" aria-hidden="true" /></summary><div className="faq-answer"><p>{registrationMessage}</p><RegistrationCTA /></div></details>
-          <details><summary>{event.contactQuestion}<span className="faq-plus" aria-hidden="true" /></summary><div className="faq-answer"><p>Email <a href={`mailto:${event.contactEmail}`}>{event.contactEmail}</a> or connect with <a href={event.instagramUrl}>{event.organizer} on Instagram</a>.</p></div></details>
+          {event.faq.map(({ question, answer }) => <FAQItem key={question} question={question}><p>{answer}</p></FAQItem>)}
+          <FAQItem question={event.registrationQuestion}><p>{registrationMessage}</p><RegistrationCTA /></FAQItem>
+          <FAQItem question={event.contactQuestion}><p>Email <a href={`mailto:${event.contactEmail}`}>{event.contactEmail}</a> or connect with <a href={event.instagramUrl}>{event.organizer} on Instagram</a>.</p></FAQItem>
         </div>
       </Container>
     </section>

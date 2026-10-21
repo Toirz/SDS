@@ -8,11 +8,12 @@ Edit `src/features/event/config.ts`. `EventConfig` in `types.ts` checks the requ
 | --- | --- |
 | `name`, `shortName`, `organizer`, `year` | Identity, hero, header, footer and metadata |
 | `description` | Page description and basic Open Graph text |
-| `hero` | Hero introduction and decorative motif caption |
+| `hero` | Decorative motif caption; the typed hero title uses `name` and highlights `year` |
 | `dates` | Hero, overview, date milestones and date FAQ |
 | `venue`, `audience` | Overview facts and hero audience |
 | `prizeAmount`, `prizes` | Prize band and factual prize statement |
 | `overview`, `expectations`, `milestones` | Main section copy |
+| `tracks` | Track heading, introduction and Category A/B descriptions and levels |
 | `faq` | Factual questions and answers |
 | `registrationMessages` | FAQ text for validated registration state |
 | `closing` | Final call to action and contact copy |
@@ -21,7 +22,7 @@ Edit `src/features/event/config.ts`. `EventConfig` in `types.ts` checks the requ
 | `navigation` | Desktop and mobile anchor links |
 | `logo` | Public asset path, alt text and intrinsic dimensions |
 
-Keep dates as `YYYY-MM-DD`. The formatter fixes the timezone to UTC. Registration status never changes automatically with the date. The historical 2026 dates are deliberate.
+Keep dates as `YYYY-MM-DD`. The formatter fixes the timezone to UTC. Registration status never changes automatically with the date. The 2027 event identity and historical 2026 dates are deliberate; the user confirmed retaining those dates.
 
 When changing a fact, also check any manually written FAQ answer about that fact. The date answer is derived automatically; eligibility and venue answers are editable text. Keep visitor-facing content in English and do not add unverified team sizes, detailed schedules, lecture theatre numbers, prize allocations or fees.
 

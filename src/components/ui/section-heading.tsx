@@ -1,8 +1,3 @@
-export function SectionHeading({ number, label, title }: { number: string; label: string; title: string }) {
-  return (
-    <div className="section-heading">
-      <p className="eyebrow"><span className="section-number">{number}</span>{label}</p>
-      <h2>{title}</h2>
-    </div>
-  );
+export function SectionHeading({ title }: { title: string }) {
+  return <h2 className="section-heading">{title}</h2>;
 }

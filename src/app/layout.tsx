@@ -13,7 +13,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `try { if (localStorage.getItem("theme") === "light") document.documentElement.dataset.theme = "light"; } catch {}` }} />
+      </head>
       <body>
         <a className="skip-link" href="#main-content">Skip to content</a>
         <SiteHeader />

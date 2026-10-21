@@ -8,15 +8,12 @@ const dates = {
 const prizeAmount = "1,000";
 
 export const event: EventConfig = {
-  name: "NUS SDS Datathon 2026",
-  shortName: "NUS Datathon 2026",
+  name: "NUS SDS Datathon 2027",
+  shortName: "NUS Datathon 2027",
   organizer: "NUS SDS",
-  year: "2026",
-  description: "NUS SDS Datathon 2026 brings Singapore university undergraduates together to tackle real-world problems with data, guided workshops and collaboration.",
+  year: "2027",
+  description: "NUS SDS Datathon 2027 brings Singapore university undergraduates together to tackle real-world problems with data, guided workshops and collaboration.",
   hero: {
-    eyebrow: "Ideas grounded in data.",
-    title: "Datathon",
-    intro: "Turn data into real-world impact. Explore datasets, build ideas and solve meaningful problems together.",
     motifCaption: "Data. Perspective. Possibility.",
   },
   audience: "Undergraduate students from universities across Singapore",
@@ -41,6 +38,7 @@ export const event: EventConfig = {
   },
   navigation: [
     { href: "#about", label: "About" },
+    { href: "#tracks", label: "Tracks" },
     { href: "#dates", label: "Key Dates" },
     { href: "#faq", label: "FAQ" },
   ],
@@ -57,14 +55,22 @@ export const event: EventConfig = {
       { title: "Think better, together.", description: "Exchange perspectives and collaborate with fellow university students from across Singapore." },
     ],
   },
+  tracks: {
+    title: "Two tracks. Find your starting point.",
+    intro: "Choose the track that matches your experience with data.",
+    items: [
+      { name: "Category A", level: "Beginner friendly", description: "New to datathons? Start here. Explore real-world data, build your confidence and put your curiosity to work in a beginner-friendly challenge." },
+      { name: "Category B", level: "Advanced", description: "Ready for a deeper challenge? Put your experience with data to work and push your analytical skills further in the advanced track." },
+    ],
+  },
   milestones: [
     { label: "Registration deadline", date: dates.registrationDeadline, description: "Registration deadline for this edition." },
-    { label: "Event begins", date: dates.start, description: "The start of NUS SDS Datathon 2026." },
+    { label: "Event begins", date: dates.start, description: "The start of the competition." },
     { label: "Event concludes", date: dates.end, description: "The final date of the competition." },
   ],
   faq: [
     { question: "Who can participate?", answer: "The competition is for undergraduate students from universities across Singapore." },
-    { question: "Do I need experience with data?", answer: "Beginners and experienced participants are welcome. The event includes guided workshops and practical experience with datasets." },
+    { question: "Do I need experience with data?", answer: "Beginners and experienced participants are welcome. Category A is beginner friendly, while Category B is advanced. The event includes guided workshops and practical experience with datasets." },
     { question: "When does the event take place?", answer: `The event runs from ${formatEventDate(dates.start)} to ${formatEventDate(dates.end)}. The registration deadline is ${formatEventDate(dates.registrationDeadline)}.` },
     { question: "Where is the event held?", answer: "The venue is NUS Lecture Theatre." },
   ],

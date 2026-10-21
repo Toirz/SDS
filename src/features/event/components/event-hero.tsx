@@ -2,16 +2,15 @@ import { Container } from "@/components/ui/container";
 import { event, formatEventDate } from "@/features/event/config";
 import { RegistrationCTA } from "./registration-cta";
 import { DataMotif } from "./data-motif";
+import { HeroTitle } from "./hero-title";
 
 export function EventHero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <Container>
-        <div className="hero-topline"><p className="eyebrow">{event.hero.eyebrow}</p><span className="edition-label">{event.year} EDITION</span></div>
         <div className="hero-grid">
           <div className="hero-content">
-            <h1 id="hero-title" aria-label={event.name}><span className="hero-organizer">{event.organizer}</span>{event.hero.title}<span className="hero-year">{event.year}<span aria-hidden="true">.</span></span></h1>
-            <p className="hero-intro">{event.hero.intro}</p>
+            <HeroTitle name={event.name} organizer={event.organizer} year={event.year} />
             <div className="hero-actions"><RegistrationCTA /><a className="button button-text" href="#about">Explore the event <span aria-hidden="true">↓</span></a></div>
           </div>
           <div className="hero-facts">
