@@ -24,7 +24,7 @@ Edit `src/features/event/config.ts`. `EventConfig` in `types.ts` checks the requ
 
 Keep dates as `YYYY-MM-DD`. The formatter fixes the timezone to UTC. Registration status never changes automatically with the date. The 2027 event identity and historical 2026 dates are deliberate; the user confirmed retaining those dates.
 
-When changing a fact, also check any manually written FAQ answer about that fact. The date answer is derived automatically; eligibility and venue answers are editable text. Keep visitor-facing content in English and do not add unverified team sizes, detailed schedules, lecture theatre numbers, prize allocations or fees.
+When changing a fact, also check any manually written FAQ answer about that fact. The date answer is derived automatically; eligibility and venue answers are editable text. Keep all project text in English, including visitor-facing content, documentation, code comments and handoffs, and do not add unverified team sizes, detailed schedules, lecture theatre numbers, prize allocations or fees.
 
 ## Registration
 

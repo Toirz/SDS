@@ -2,7 +2,7 @@
 
 ## Application boundary
 
-One Next.js App Router application serves the public event page at `/`. There is no separate backend, database, API route or authentication. `Prompt.txt` is the supplied specification and remains unchanged.
+One Next.js App Router application serves the public event page at `/`. There is no separate backend, database, API route or authentication. `Prompt.txt` is the supplied specification, with language guidance updated to require English throughout the project.
 
 `src/app/page.tsx` composes small event sections. The root layout provides the shared header, footer, skip link and metadata. The explicit not-found page returns visitors to the event.
 

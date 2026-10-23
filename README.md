@@ -1,10 +1,10 @@
-# NUS SDS Datathon 2026
+# NUS SDS Datathon 2027
 
-Website sự kiện bằng tiếng Anh, xây dựng với Next.js App Router, React, TypeScript strict và Tailwind CSS. Nội dung giữ nguyên các mốc lịch sử năm 2026; các nút đăng ký mở Google Form do người dùng cung cấp. Không cần API key, tài khoản cloud hay dịch vụ ngoài để chạy.
+English-language event website built with Next.js App Router, React, strict TypeScript and Tailwind CSS. The content retains the historical 2026 dates; registration buttons open the user-supplied Google Form. No API keys, cloud accounts or external services are required to run the project. All project content, documentation and implementation handoffs use English.
 
-## Chạy trên máy
+## Run locally
 
-Sử dụng **Node.js 24 LTS**, bản đã kiểm tra **24.20.0**, và **npm 11.19.0**. Nếu dùng nvm:
+Use **Node.js 24 LTS**, tested with **24.20.0**, and **npm 11.19.0**. With nvm:
 
 ```bash
 nvm install
@@ -13,20 +13,20 @@ npm ci
 npm run dev
 ```
 
-Mở http://localhost:3000. Nếu đã có Node.js 24, chỉ cần hai lệnh npm.
+Open http://localhost:3000. If Node.js 24 is already installed, only the two npm commands are needed.
 
-## Các lệnh
+## Commands
 
-| Lệnh | Chức năng |
+| Command | Purpose |
 | --- | --- |
-| `npm run dev` | Chạy môi trường phát triển |
-| `npm run build` | Build production, không tải font từ xa |
-| `npm run start` | Chạy production sau khi build |
-| `npm run lint` | ESLint; cảnh báo cũng làm kiểm tra thất bại |
-| `npm run typecheck` | Sinh kiểu route và kiểm tra TypeScript strict |
-| `npm test` | Kiểm tra trạng thái CTA, URL an toàn và ngày theo múi giờ bằng test runner có sẵn của Node.js |
+| `npm run dev` | Start the development server |
+| `npm run build` | Build for production without downloading remote fonts |
+| `npm run start` | Start the production server after building |
+| `npm run lint` | Run ESLint; warnings also fail the check |
+| `npm run typecheck` | Generate route types and run strict TypeScript checks |
+| `npm test` | Check CTA states, safe URLs and dates across timezones with Node.js's built-in test runner |
 
-Để kiểm tra và chạy bản production:
+To check and run the production version:
 
 ```bash
 npm test
@@ -36,71 +36,71 @@ npm run build
 npm run start
 ```
 
-`npm run start` phục vụ bản production tại **http://localhost:3000**. Sau khi cập nhật và build lại, dừng server cũ bằng `Ctrl+C` rồi chạy lại `npm run start`; server đang chạy có thể giữ HTML của build cũ và yêu cầu các file CSS/JS không còn tồn tại. Bản thiết kế đã duyệt được cập nhật tại cổng 3000; đây là triển khai trên máy local.
+`npm run start` serves the production build at **http://localhost:3000**. After updating and rebuilding, stop the old server with `Ctrl+C` and run `npm run start` again; a running server can retain HTML from the previous build and request CSS/JS files that no longer exist. The approved design is available on port 3000 as a local deployment.
 
-## Cấu trúc chính
+## Main structure
 
 ```text
-src/app/                    Route /, layout, metadata, CSS và trang 404
-src/components/layout/      Header, footer và menu di động
-src/components/ui/          Container và tiêu đề section dùng chung
-src/features/event/         Cấu hình, kiểu dữ liệu, logic đăng ký, test và các section
-public/images/              Logo dùng trong website
-docs/                       Kiến trúc, hướng dẫn nội dung và roadmap
-References/                 Ảnh gốc người dùng cung cấp, được giữ nguyên
+src/app/                    Route /, layout, metadata, CSS and 404 page
+src/components/layout/      Header, footer and mobile navigation
+src/components/ui/          Shared container and section heading
+src/features/event/         Configuration, types, registration logic, tests and sections
+public/images/              Website logo
+docs/                       Architecture, content editing guide and roadmap
+References/                 Original user-supplied images, preserved unchanged
 ```
 
-## Chỉnh nội dung và đăng ký
+## Edit content and registration
 
-Chỉnh **`src/features/event/config.ts`** để đổi nội dung, ngày, nơi tổ chức, giải thưởng, email, Instagram hoặc đường dẫn logo. Ngày dùng định dạng `YYYY-MM-DD`, không thêm giờ. FAQ về ngày và timeline dùng chung các giá trị ngày. Đọc [hướng dẫn chỉnh sửa](docs/content-editing.md) để biết từng trường.
+Edit **`src/features/event/config.ts`** to change content, dates, venue, prizes, email, Instagram or the logo path. Dates use `YYYY-MM-DD` without a time. The date FAQ and timeline share the same date values. See the [content editing guide](docs/content-editing.md) for individual settings.
 
-Đăng ký dùng hai trường trong cùng file:
+Registration uses two fields in the same file:
 
 ```ts
 registrationUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdu4_BHd9Aua3wc7cBTvlvC2P0KJeHwNw_lZVO8UYO1ft-jYg/viewform",
 registrationStatus: "open",
 ```
 
-Khi thay form, điền URL tuyệt đối bắt đầu bằng `https://` hoặc `http://` và giữ trạng thái `"open"`. Vô hiệu hóa đăng ký bằng `registrationUrl: null` và `registrationStatus: "unavailable"`.
+When replacing the form, enter an absolute URL starting with `https://` or `http://` and keep the status as `"open"`. Disable registration with `registrationUrl: null` and `registrationStatus: "unavailable"`.
 
-Đóng đăng ký bằng `registrationStatus: "closed"`. Trạng thái đóng luôn ưu tiên; URL thiếu hoặc không hợp lệ luôn vô hiệu hóa CTA. Tất cả CTA dùng `RegistrationCTA`, link hoạt động mở tab mới và có thông báo cho trình đọc màn hình. **Không tự đổi trạng thái theo ngày hiện tại.** Trong production cần build lại sau khi sửa cấu hình.
+Close registration with `registrationStatus: "closed"`. Closed status always takes priority; a missing or invalid URL always disables the CTA. All CTAs use `RegistrationCTA`; active links open a new tab with an announcement for screen readers. **Status never changes automatically based on the current date.** Production requires a rebuild after configuration changes.
 
-Màu, font, spacing và radius nằm ở đầu **`src/app/globals.css`**. Nút mặt trời/mặt trăng trên header đổi giữa theme sáng (nền trắng, chữ đen, highlight vàng như trước) và theme tối (nền xanh đen `#0A0D14` tham khảo [LifeHack 2026](https://lifehack2026.nuscomputing.com/), chữ trắng, các ô thông tin `#0D1118`). Mặc định là theme tối; lựa chọn được lưu trong localStorage và khôi phục trước khi trang hiển thị. Nếu trình duyệt chặn lưu trữ, nút vẫn đổi theme cho trang đang mở. Bảng màu nằm trong `:root` (tối) và `:root[data-theme="light"]` (sáng), với typography và khoảng trắng tham khảo [Notion](https://www.notion.com/). Font [Inter](https://rsms.me/inter/) được lưu tại **`public/fonts/InterVariable.woff2`**, kèm giấy phép **`public/fonts/Inter-LICENSE.txt`**; không tải font từ dịch vụ ngoài khi build hoặc xem trang. Logo production là **`public/images/sds-logo.jpg`**, được sao chép nguyên bản từ `References/sds_logo.jpg`. Khi thay logo, cập nhật cả đường dẫn, kích thước và alt text trong cấu hình; giữ tỷ lệ gốc và đặt logo có nền trắng trên nền sáng.
+Colors, fonts, spacing and radii are defined at the top of **`src/app/globals.css`**. The sun/moon button in the header switches between the light theme (white background, black text and the original yellow highlights) and the dark theme (navy-black `#0A0D14` background inspired by [LifeHack 2026](https://lifehack2026.nuscomputing.com/), white text and `#0D1118` information panels). The default is dark; the preference is saved in localStorage and restored before the page appears. If the browser blocks storage, the button still switches the current page's theme. Palettes are in `:root` (dark) and `:root[data-theme="light"]` (light), with typography and spacing inspired by [Notion](https://www.notion.com/). The [Inter](https://rsms.me/inter/) font is stored at **`public/fonts/InterVariable.woff2`**, with its license at **`public/fonts/Inter-LICENSE.txt`**; no external font service is used during builds or page visits. The production logo at **`public/images/sds-logo.jpg`** is an unchanged copy of `References/sds_logo.jpg`. When replacing it, update the path, dimensions and alt text in the configuration; preserve its original proportions and place logos with white backgrounds on a light surface.
 
-## Phạm vi và triển khai sau này
+## Scope and future deployment
 
-Đã có landing page, menu di động, CTA, FAQ mở/đóng mượt trong 300 ms, trang 404, title/description/Open Graph dạng văn bản và hỗ trợ reduced motion. Phần lớn giao diện là Server Components; header, menu di động và từng câu FAQ là Client Components. FAQ hỗ trợ Enter/Space, giữ mỗi câu mở độc lập và tắt hiệu ứng khi bật reduced motion. Khi tải lại trang, vị trí cuộn trở về đầu, kể cả URL có fragment; đường kẻ dưới header chỉ hiện khi cuộn xuống và ẩn lại ở đầu trang.
+Implemented features include the landing page, mobile navigation, CTAs, FAQ with smooth 300 ms expand/collapse transitions, 404 page, title/description/text Open Graph metadata and reduced-motion support. Most of the interface uses Server Components; the header, mobile navigation, hero title and individual FAQ entries use Client Components. The FAQ supports Enter/Space, allows each answer to remain open independently and disables animation for reduced motion. Reloading resets the scroll position to the top, including URLs with fragments; the header divider appears only after scrolling and disappears at the top.
 
-Test trình duyệt cho header, hiệu ứng gõ tiêu đề, đổi theme và FAQ nằm ở `tests/header-scroll.test.mjs`, `tests/hero-typing.test.mjs`, `tests/theme-toggle.test.mjs` và `tests/faq-animation.test.mjs`, chạy với server local tại cổng 3000 và Playwright/Chromium đã cài ngoài dự án: `NODE_PATH=/path/to/browser-tools/node_modules node --test tests/*.test.mjs`.
+Browser tests for header scrolling, title typing, theme switching and FAQ animations are in `tests/header-scroll.test.mjs`, `tests/hero-typing.test.mjs`, `tests/theme-toggle.test.mjs` and `tests/faq-animation.test.mjs`. Run them against a local server on port 3000 with Playwright/Chromium installed outside the project: `NODE_PATH=/path/to/browser-tools/node_modules node --test tests/*.test.mjs`.
 
-Chưa có authentication, database, form đăng ký nội bộ, dashboard, chat, quản lý đội hoặc Team Finder. Xem [kiến trúc](docs/architecture.md) và [roadmap](docs/roadmap.md).
+Authentication, a database, an internal registration form, dashboards, chat, team management and Team Finder are outside the current scope. See the [architecture](docs/architecture.md) and [roadmap](docs/roadmap.md).
 
-Chưa chọn domain hoặc dịch vụ hosting. Khi có domain, thêm `metadataBase`, canonical và URL Open Graph thực trong `src/app/layout.tsx`; chỉ thêm ảnh social preview khi có asset được duyệt. Không có URL production giả.
+No domain or hosting service has been selected. Once a domain is available, add `metadataBase`, canonical metadata and the real Open Graph URL in `src/app/layout.tsx`; add a social preview image only when an approved asset is available. No placeholder production URL is configured.
 
-## Phiên bản và lưu ý dependency
+## Versions and dependency notes
 
-Phiên bản được ghim và lưu trong `package-lock.json`: Next.js 16.4.0, React 19.3.0, Tailwind CSS 4.3.3, TypeScript 5.9.3, ESLint 9.39.5. Thiết lập theo tài liệu chính thức của [Next.js](https://nextjs.org/docs/app/getting-started/installation), [ESLint cho Next.js](https://nextjs.org/docs/app/api-reference/config/eslint), [Tailwind CSS](https://tailwindcss.com/docs/installation/framework-guides/nextjs) và [Node.js LTS](https://nodejs.org/en/about/previous-releases).
+Versions are pinned in `package-lock.json`: Next.js 16.4.0, React 19.3.0, Tailwind CSS 4.3.3, TypeScript 5.9.3 and ESLint 9.39.5. Setup follows the official documentation for [Next.js](https://nextjs.org/docs/app/getting-started/installation), [ESLint with Next.js](https://nextjs.org/docs/app/api-reference/config/eslint), [Tailwind CSS](https://tailwindcss.com/docs/installation/framework-guides/nextjs) and [Node.js LTS](https://nodejs.org/en/about/previous-releases).
 
-ESLint 9 đã hết hỗ trợ, nhưng là major tương thích với các plugin React, import và accessibility hiện được `eslint-config-next@16.4.0` sử dụng. Không ép các peer dependency lên ESLint 10. Kiểm tra lại khả năng nâng cấp khi Next.js cập nhật bộ plugin.
+The existing dependency review records ESLint 9 as past support but compatible with the React, import and accessibility plugins used by `eslint-config-next@16.4.0`. Do not force its peer dependencies onto ESLint 10. Reassess the upgrade when Next.js updates its plugins.
 
-Ngày 12 October 2026, `npm audit --omit=dev` không báo lỗ hổng. Audit đầy đủ báo 5 mục high, cùng bắt nguồn từ dependency `braces` trong chuỗi công cụ lint. [Advisory GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm) chưa có bản vá. Mẫu glob trong dự án là nội bộ; website không đưa input từ khách truy cập vào công cụ này. Giữ cấu hình lint tương thích, không chạy `npm audit fix --force` để hạ Next.js config về major cũ. Kiểm tra lại vào **12 November 2026** hoặc trước khi triển khai, tùy mốc nào đến trước.
+On 12 October 2026, `npm audit --omit=dev` reported no vulnerabilities. The full audit reported five high-severity findings, all originating from `braces` in the lint tooling. At that review, [advisory GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm) had no patch. The project's glob patterns are internal; the website does not pass visitor input to this tool. Keep the compatible lint configuration; do not run `npm audit fix --force` to downgrade the Next.js configuration to an older major. Review again by **12 November 2026** or before deployment, whichever comes first.
 
-Ảnh poster chưa được cung cấp. Nội dung sự kiện dùng các dữ kiện trong `Prompt.txt`; nguồn bài đăng được lưu trong cấu hình để đối chiếu thủ công sau này.
+No poster image has been supplied. Event content uses facts from `Prompt.txt`; the source post is stored in the configuration for future manual reference.
 
-## Kết quả kiểm tra bản đầu tiên
+## Initial verification results
 
-Ngày 12 October 2026:
+On 12 October 2026:
 
-- Cài sạch bằng `npm ci` thành công; không có peer dependency không hợp lệ.
-- `npm test`: 5 test đạt, gồm các tổ hợp trạng thái/URL đăng ký và ngày ở ba múi giờ.
-- Lint không có lỗi/cảnh báo; typecheck strict và production build đạt. Route `/` được prerender tĩnh.
-- Chromium: kiểm tra 320, 390, 768, 1024 và 1440px; ảnh tải được, không tràn ngang, không có lỗi console hoặc request thất bại trên trang chính.
-- Kiểm tra skip link, Tab/Enter, Escape và trả focus cho menu, anchor navigation, đóng menu khi đổi sang desktop, FAQ bằng bàn phím, CTA mặc định bị vô hiệu hóa và trang 404 với link quay về.
-- Axe kiểm tra các nhóm WCAG 2 A/AA và 2.1 AA: không phát hiện lỗi ở các chiều rộng trên, kể cả menu mở và FAQ mở. Đây là kiểm tra tự động, chưa phải đánh giá đầy đủ bằng trình đọc màn hình.
-- Đã mở cả hai website tham khảo bằng Chromium. Công cụ kiểm tra browser được cài ngoài dự án, không thêm dependency chạy ứng dụng.
+- A clean `npm ci` completed successfully with no invalid peer dependencies.
+- `npm test`: five tests passed, covering registration status/URL combinations and dates in three timezones.
+- Lint passed without errors or warnings; strict typechecking and the production build passed. Route `/` was statically prerendered.
+- Chromium checks at 320, 390, 768, 1024 and 1440px confirmed that images loaded, no horizontal overflow occurred and the main page had no console errors or failed requests.
+- Checks covered the skip link, Tab/Enter, Escape and focus restoration in the menu, anchor navigation, menu closure when switching to desktop, keyboard FAQ controls, the default disabled CTA and the 404 return link.
+- Axe found no WCAG 2 A/AA or 2.1 AA violations at those widths, including with the menu and FAQ open. This was automated testing, not a complete screen reader assessment.
+- Both reference websites were opened in Chromium. Browser tools were installed outside the project without adding application dependencies.
 
-Chưa kiểm tra Firefox/Safari hoặc thiết bị di động thật; chưa kiểm tra form đăng ký thực vì chưa có URL; chưa triển khai website.
+That initial verification did not cover Firefox/Safari, physical mobile devices or the real registration form, whose URL had not yet been supplied. The website had not been deployed publicly.
 
-## Kiểm tra giao diện sau khi thiết kế lại
+## Verification after the redesign
 
-Ngày 12 October 2026: Chromium tại 320, 390, 768, 1024 và 1440px không tràn ngang; Inter local tải thành công, nền trắng và tiêu đề weight 650. Menu desktop nằm giữa viewport, logo và đăng ký cách hai mép 24px; hover và nhấn giữ có nền xám. Section padding giảm còn 32–48px; chiều dài trang ở 1440px giảm từ khoảng 4.493px xuống khoảng 3.001px. Dates, venue, eligibility và prizes có ô riêng với icon, viền và highlight vàng. Menu, FAQ, điều hướng anchor, skip link, bàn phím, CTA không khả dụng và trang 404 đều đạt. Axe không phát hiện lỗi WCAG 2 A/AA hoặc 2.1 AA, kể cả menu và FAQ mở; không có lỗi console hoặc request thất bại. Giữ nguyên các giới hạn kiểm tra trình duyệt và triển khai ở trên.
+On 12 October 2026, Chromium checks at 320, 390, 768, 1024 and 1440px found no horizontal overflow. Local Inter loaded successfully; the background was white and headings used weight 650. Desktop navigation was centered in the viewport, with the logo and registration controls 24px from the edges; hover and pressed states used gray backgrounds. Section padding was reduced to 32–48px; page height at 1440px decreased from approximately 4,493px to 3,001px. Dates, venue, eligibility and prizes had dedicated panels with icons, borders and yellow highlights. Menu, FAQ, anchor navigation, skip link, keyboard controls, unavailable CTAs and the 404 page all passed. Axe found no WCAG 2 A/AA or 2.1 AA violations, including with the menu and FAQ open; no console errors or failed requests occurred. The browser and deployment limitations above still apply to that verification.

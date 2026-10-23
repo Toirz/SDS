@@ -15,7 +15,7 @@ The website should:
 
 This phase is a public event website. Do not implement authentication, databases, registration forms, dashboards, chat, team management, or team finder functionality.
 
-All visitor-facing text must be in English. You may explain your implementation and handoff to me in Vietnamese.
+All project text must be in English, including visitor-facing content, documentation, code comments, implementation explanations and handoffs.
 
 ## 2. Technology decisions
 
@@ -301,7 +301,7 @@ README.md should explain:
 - How to configure the registration URL and status.
 - What remains outside this phase.
 
-At completion, summarize in Vietnamese:
+At completion, summarize in English:
 - What was implemented.
 - The main folders and their responsibilities.
 - Commands to run the project.
