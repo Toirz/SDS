@@ -14,7 +14,9 @@ export interface EventConfig extends RegistrationSettings {
   hero: { motifCaption: string };
   audience: string;
   venue: string;
-  dates: { start: string; end: string; registrationDeadline: string };
+  teamSize: string;
+  entryFee: string;
+  dates: { registrationOpens: string; registrationDeadline: string; start: string; end: string };
   prizes: { statement: string; amount: string; currency: string; intro: string };
   contactEmail: string;
   instagramUrl: string;
@@ -23,7 +25,8 @@ export interface EventConfig extends RegistrationSettings {
   navigation: { href: string; label: string }[];
   overview: { title: string; intro: string; detail: string };
   expectations: { title: string; items: { title: string; description: string }[] };
-  tracks: { title: string; intro: string; items: { name: string; level: string; description: string }[] };
+  tracks: { title: string; intro: string; prerequisites: string; items: { name: string; level: string; description: string }[] };
+  milestonesNote: string;
   milestones: { label: string; date: string; description: string }[];
   faq: { question: string; answer: string }[];
   registrationQuestion: string;

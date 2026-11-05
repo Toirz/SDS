@@ -40,9 +40,10 @@ test("date-only event values retain the supplied dates across server timezones",
   try {
     for (const timezone of ["Pacific/Honolulu", "Asia/Singapore", "Pacific/Kiritimati"]) {
       process.env.TZ = timezone;
-      assert.equal(formatEventDate(event.dates.start), "17 January 2026");
-      assert.equal(formatEventDate(event.dates.end), "7 February 2026");
-      assert.equal(formatEventDate(event.dates.registrationDeadline), "14 January 2026");
+      assert.equal(formatEventDate(event.dates.registrationOpens), "28 December 2026");
+      assert.equal(formatEventDate(event.dates.registrationDeadline), "14 January 2027");
+      assert.equal(formatEventDate(event.dates.start), "30 January 2027");
+      assert.equal(formatEventDate(event.dates.end), "20 February 2027");
     }
   } finally {
     if (originalTimezone === undefined) delete process.env.TZ;

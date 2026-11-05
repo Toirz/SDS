@@ -131,7 +131,7 @@ h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 650; line-height: 1.1; le
 .overview-grid { display: grid; gap: 1.5rem; }
 .overview-copy { color: var(--muted); font-size: 1rem; }
 .overview-copy .lead { color: var(--charcoal); font-size: 1.125rem; line-height: 1.5; margin-bottom: 0.75rem; }
-.event-details { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 1.5rem; }
+.event-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 1.5rem; }
 .event-details > div { padding: 1.25rem; border: 1px solid var(--line); border-top: 3px solid var(--yellow); border-radius: var(--radius); background: var(--surface); }
 .event-details dt { display: flex; align-items: center; gap: 0.5rem; color: var(--charcoal); font-weight: 600; margin-bottom: 0.75rem; }
 .event-details svg { flex-shrink: 0; }
@@ -144,6 +144,7 @@ h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 650; line-height: 1.1; le
 h3 { font-size: 1.25rem; line-height: 1.4; font-weight: 600; letter-spacing: -0.025em; }
 .expectation-list p { font-size: 1rem; color: var(--muted); line-height: 1.6; margin-top: 0.5rem; max-width: 30rem; }
 .tracks-intro { margin-top: 1rem; color: var(--muted); }
+.tracks-prerequisites { margin-top: 0.5rem; max-width: 48rem; font-size: 0.875rem; color: var(--muted); }
 .track-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-top: 1.5rem; }
 .track-card { padding: 1.5rem; border: 1px solid var(--line); border-top: 3px solid var(--charcoal); border-radius: var(--radius); }
 .track-card:first-child { background: var(--yellow-soft); border-top-color: var(--yellow); }

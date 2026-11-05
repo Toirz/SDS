@@ -8,6 +8,7 @@ export function EventTracks() {
       <Container>
         <SectionHeading title={event.tracks.title} />
         <p className="tracks-intro">{event.tracks.intro}</p>
+        <p className="tracks-prerequisites">{event.tracks.prerequisites}</p>
         <div className="track-list">
           {event.tracks.items.map(({ name, level, description }) => (
             <article className="track-card" key={name}>
