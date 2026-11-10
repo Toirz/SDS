@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore, type MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
@@ -16,10 +16,29 @@ function subscribeToScroll(onChange: () => void) {
 function isScrolled() { return window.scrollY > 0; }
 function isScrolledOnServer() { return false; }
 
-function toggleTheme() {
-  const theme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+function applyTheme(theme: "light" | "dark") {
   document.documentElement.dataset.theme = theme;
   try { localStorage.setItem("theme", theme); } catch { /* Keep switching available when storage is blocked. */ }
+}
+
+// The new theme spreads out as a circle from the toggle until it covers the whole screen.
+function toggleTheme(clickEvent: MouseEvent<HTMLButtonElement>) {
+  const theme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+  if (!document.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    applyTheme(theme);
+    return;
+  }
+  const button = clickEvent.currentTarget.getBoundingClientRect();
+  const x = button.left + button.width / 2;
+  const y = button.top + button.height / 2;
+  const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+  const transition = document.startViewTransition(() => applyTheme(theme));
+  transition.ready.then(() => {
+    document.documentElement.animate(
+      { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+      { duration: 700, easing: "cubic-bezier(0.65, 0, 0.35, 1)", pseudoElement: "::view-transition-new(root)" },
+    );
+  }).catch(() => { /* The theme is already applied if the animation cannot run. */ });
 }
 
 export function SiteHeader() {

@@ -8,12 +8,12 @@ Edit `src/features/event/config.ts`. `EventConfig` in `types.ts` checks the requ
 | --- | --- |
 | `name`, `shortName`, `organizer`, `year` | Identity, hero, header, footer and metadata |
 | `description` | Page description and basic Open Graph text |
-| `hero` | Decorative motif caption; the typed hero title uses `name` and highlights `year` |
+| `hero` | Tagline used by the promo video; the typed hero title uses `name` and highlights `year` |
 | `dates` | Registration window and event start/end used by the hero, overview and tests; the full schedule lives in the `dates` constant at the top of `config.ts` |
-| `venue`, `audience`, `teamSize`, `entryFee` | Overview facts and hero audience |
-| `prizeAmount`, `prizes` | Prize band and factual prize statement |
-| `overview`, `expectations`, `milestones`, `milestonesNote` | Main section copy and the key dates timeline |
-| `tracks` | Track heading, introduction, recommended skills and Category A/B descriptions and levels |
+| `venue`, `audience`, `teamSize`, `entryFee` | Overview facts |
+| `prizeAmount`, `prizes` | Total cash prize and the participant perks list (`intro` is the promo video's prize headline) |
+| `overview`, `milestones` | Overview heading and the key dates timeline |
+| `tracks` | Track heading and Category A/B names, and levels for the track panels (descriptions are used by the promo video) |
 | `faq` | Factual questions and answers |
 | `registrationMessages` | FAQ text for validated registration state |
 | `closing` | Final call to action and contact copy |
@@ -26,7 +26,7 @@ Keep dates as `YYYY-MM-DD`. The formatter fixes the timezone to UTC. Registratio
 
 When changing a fact, also check any manually written FAQ answer about that fact. The date answer is derived automatically; other answers are editable text. Keep all project text in English, including visitor-facing content, documentation, code comments and handoffs.
 
-Publish only what participants need. Keep organiser-only proposal details off the site: partner finalisation, internal grading, informal rankings, shortlist sizes, tentative room numbers, catering and unconfirmed partner or dataset names. Do not add unverified prize allocations.
+Publish only what participants need. Keep organiser-only proposal details off the site: partner finalisation, internal grading, informal rankings, shortlist sizes, tentative room numbers, per-item costs and unconfirmed partner or dataset names. Do not add unverified prize allocations.
 
 ## Registration
 

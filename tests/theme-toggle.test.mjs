@@ -19,7 +19,7 @@ test("header theme switch restores both palettes and remembers the choice before
         return [color("body", "backgroundColor"), color("body", "color"), color(".hero-year", "backgroundColor", "::after"), color(".prizes-inner", "backgroundColor")];
       });
       assert.deepEqual(actual, theme === "dark"
-        ? ["rgb(10, 13, 20)", "rgb(255, 255, 255)", "rgb(40, 35, 13)", "rgb(40, 35, 13)"]
+        ? ["rgb(10, 13, 20)", "rgb(255, 255, 255)", "rgb(255, 223, 87)", "rgb(40, 35, 13)"]
         : ["rgb(255, 255, 255)", "rgb(17, 17, 17)", "rgb(255, 223, 87)", "rgb(255, 223, 87)"]);
     };
     for (const width of [320, 390, 768, 1024, 1440]) {

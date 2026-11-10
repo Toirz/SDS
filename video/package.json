@@ -1,0 +1,25 @@
+{
+  "name": "nus-sds-datathon-video",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render DatathonPromo out/datathon-promo-16x9.mp4",
+    "render:webm": "remotion render DatathonPromo out/datathon-promo-16x9.webm --codec=vp9",
+    "poster": "remotion still DatathonPromo out/datathon-promo-poster.jpg --frame=300",
+    "publish": "npm run render && npm run poster && cp out/datathon-promo-16x9.mp4 ../public/videos/datathon-promo.mp4 && cp out/datathon-promo-poster.jpg ../public/videos/datathon-promo-poster.jpg",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.542",
+    "@remotion/fonts": "4.0.542",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "remotion": "4.0.542"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "typescript": "5.9.3"
+  }
+}

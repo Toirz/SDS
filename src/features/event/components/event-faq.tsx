@@ -12,7 +12,7 @@ export function EventFAQ() {
   return (
     <section id="faq" tabIndex={-1} className="section faq" aria-label="Frequently asked questions">
       <Container className="faq-grid">
-        <SectionHeading title="A few things to know." />
+        <SectionHeading title="A few things to know." label="FAQ" tone="pink" icon="help" highlight="to know" />
         <div className="faq-list">
           {event.faq.map(({ question, answer }) => <FAQItem key={question} question={question}><p>{answer}</p></FAQItem>)}
           <FAQItem question={event.registrationQuestion}><p>{registrationMessage}</p><RegistrationCTA /></FAQItem>

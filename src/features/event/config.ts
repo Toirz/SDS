@@ -9,11 +9,9 @@ const dates = {
   workshopTwo: "2027-01-23",
   start: "2027-01-30",
   submissionDeadline: "2027-02-09",
-  resultsRelease: "2027-02-15",
-  finalistSlidesDue: "2027-02-19",
   end: "2027-02-20",
 };
-const prizeAmount = "1,000";
+const prizeAmount = "2,100";
 
 export const event: EventConfig = {
   name: "NUS SDS Datathon 2027",
@@ -35,10 +33,14 @@ export const event: EventConfig = {
     end: dates.end,
   },
   prizes: {
-    statement: `Prizes worth up to SGD ${prizeAmount}.`,
     amount: prizeAmount,
     currency: "SGD",
     intro: "Bring your curiosity. Put your ideas to work.",
+    perks: [
+      { title: "Event T-shirt", detail: "For the first 100 participants" },
+      { title: "Novelty cheques", detail: "For the top 3 teams in each track" },
+      { title: "Finale meals", detail: "Lunch and dinner for participants on finale day" },
+    ],
   },
   contactEmail: "statistics.society@u.nus.edu",
   instagramUrl: "https://www.instagram.com/nus.sds/",
@@ -59,36 +61,20 @@ export const event: EventConfig = {
   ],
   overview: {
     title: "Curiosity meets real-world data.",
-    intro: "A free competition for students who want to ask better questions, find fresh perspectives and learn by doing.",
-    detail: "NUS SDS Datathon brings undergraduates from every discipline and university across Singapore together to tackle real-world problems with industry datasets. Build your skills in online workshops, then work as a team of three to five on a challenge that matches your experience — whether this is your first datathon or your next one.",
-  },
-  expectations: {
-    title: "More than a competition.",
-    items: [
-      { title: "Explore real-world challenges.", description: "Work with industry datasets and use data to understand problems beyond the classroom." },
-      { title: "Learn along the way.", description: "Prepare with two online workshops before the event and an in-person workshop on opening day. Beginners and experienced participants are welcome." },
-      { title: "Think better, together.", description: "Team up with fellow students from across Singapore. Finalists present their work live at NUS." },
-    ],
   },
   tracks: {
     title: "Two tracks. Find your starting point.",
-    intro: "Choose the track that matches your experience with data. Each track has its own real-world dataset.",
-    prerequisites: "Recommended for both tracks: proficiency in Python and core data science libraries such as pandas, NumPy, seaborn and Matplotlib. Knowledge of machine learning and large language models is a plus.",
     items: [
       { name: "Category A", level: "Standard", description: "New to datathons? Start here. Explore a real-world dataset, build your confidence and put your fundamentals to work." },
       { name: "Category B", level: "Advanced", description: "Ready for a deeper challenge? Take on a more demanding dataset and push your analytical and modelling skills further." },
     ],
   },
-  milestonesNote: "All times are in Singapore Time (SGT).",
   milestones: [
     { label: "Registration opens", date: dates.registrationOpens, description: "Sign up as a team, or on your own using the Team Finder option." },
     { label: "Registration closes", date: dates.registrationDeadline, description: "Last day to register, by 11:59 pm." },
     { label: "Online workshop 1", date: dates.workshopOne, description: "Useful libraries and modelling approaches for real-time data analysis and prediction." },
     { label: "Online workshop 2", date: dates.workshopTwo, description: "Working with frontier AI models: their limitations and how to address them." },
-    { label: "Opening ceremony", date: dates.start, description: "At NUS. Problem statements are released, followed by an in-person workshop." },
     { label: "Submission deadline", date: dates.submissionDeadline, description: "Submit your code and supporting materials online by 11:59 pm." },
-    { label: "Finalists announced", date: dates.resultsRelease, description: "Shortlisted teams are notified and begin preparing their presentations." },
-    { label: "Finalist slides due", date: dates.finalistSlidesDue, description: "Finalists submit their completed presentation slides by 9:00 pm." },
     { label: "Finale and closing", date: dates.end, description: "At NUS. Finalists present to the judges, followed by the prize presentation." },
   ],
   faq: [

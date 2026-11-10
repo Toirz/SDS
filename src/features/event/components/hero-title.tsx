@@ -34,7 +34,7 @@ export function HeroTitle({ name, organizer, year }: { name: string; organizer: 
         );
       })}
     </h1>
-    <noscript><style>{`.hero-title-line::before { visibility: visible; } .hero-typed-line { visibility: hidden; } .hero-year::after { transform: scaleX(1); }`}</style></noscript>
+    <noscript><style>{`.hero-title-line::before { visibility: visible; } .hero-typed-line { visibility: hidden; } .hero-year::after { transform: scaleX(1); } .hero-year { color: #111111; }`}</style></noscript>
     </>
   );
 }

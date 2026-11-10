@@ -40,8 +40,9 @@ test("hero caret follows typed text, year highlights after typing and cursor dis
     assert.deepEqual(await heading.boundingBox(), before, "typing reserves the title layout");
     assert.equal(await year.evaluate(element => getComputedStyle(element, "::after").backgroundColor), "rgb(40, 35, 13)");
     assert.ok((await page.locator(".hero-actions").boundingBox()).y - (before.y + before.height) >= 47.9);
-    const facts = await page.locator(".hero-facts").boundingBox();
-    assert.ok(facts.y + facts.height <= 844, "dates and people fit on the first screen");
+    const actions = await page.locator(".hero-actions").boundingBox();
+    assert.ok(actions.y + actions.height <= 844, "the registration buttons fit on the first screen");
+    assert.ok((await page.locator(".hero-media").boundingBox()).y >= actions.y + actions.height, "the promo video sits below the buttons");
     assert.ok((await page.locator("#about").boundingBox()).y >= 844, "the next section stays below the first screen");
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.reload({ waitUntil: "domcontentloaded" });
