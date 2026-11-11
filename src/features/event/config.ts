@@ -74,6 +74,7 @@ export const event: EventConfig = {
     { label: "Registration closes", date: dates.registrationDeadline, description: "Last day to register, by 11:59 pm." },
     { label: "Online workshop 1", date: dates.workshopOne, description: "Useful libraries and modelling approaches for real-time data analysis and prediction." },
     { label: "Online workshop 2", date: dates.workshopTwo, description: "Working with frontier AI models: their limitations and how to address them." },
+    { label: "Opening ceremony", date: dates.start, description: "At NUS. Problem statements are released, followed by an in-person workshop." },
     { label: "Submission deadline", date: dates.submissionDeadline, description: "Submit your code and supporting materials online by 11:59 pm." },
     { label: "Finale and closing", date: dates.end, description: "At NUS. Finalists present to the judges, followed by the prize presentation." },
   ],

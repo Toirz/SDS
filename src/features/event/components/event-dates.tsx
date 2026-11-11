@@ -5,7 +5,7 @@ import { event, formatEventDate } from "@/features/event/config";
 import { RevealTimeline } from "./reveal-details";
 
 // One colour per milestone, from sign-up (green) to the finale (brand yellow).
-const MILESTONE_TONES: Tone[] = ["green", "red", "blue", "purple", "pink", "yellow"];
+const MILESTONE_TONES: Tone[] = ["green", "red", "blue", "purple", "orange", "pink", "yellow"];
 
 export function EventDates() {
   const { milestones } = event;

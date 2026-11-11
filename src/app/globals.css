@@ -171,6 +171,14 @@ button, a, summary { touch-action: manipulation; }
 .hero-media-toggle { position: absolute; right: 0.75rem; bottom: 0.75rem; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; border: 1px solid rgb(255 255 255 / 0.18); border-radius: 50%; background: rgb(10 13 20 / 0.55); color: #ffffff; cursor: pointer; backdrop-filter: blur(8px); transition: background 160ms ease; }
 .hero-media-toggle:hover { background: rgb(10 13 20 / 0.8); }
 .hero-media-toggle svg { width: 1rem; height: 1rem; }
+.hero-sponsors-label { margin: clamp(3rem, 8svh, 5rem) 0 0.5rem; font-size: 0.875rem; color: var(--muted); }
+/* Only the logo row sticks to the viewport bottom until scrolled into place; shadow+clip-path paint a full-bleed backdrop. */
+.hero-sponsors { position: sticky; bottom: 0; z-index: 5; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.375rem clamp(1.25rem, 4vw, 3rem); width: 100%; margin: 0; padding: 0.5rem 0; list-style: none; background: var(--paper); box-shadow: 0 0 0 100vmax var(--paper); clip-path: inset(0 -100vmax); }
+.hero-sponsors li { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-display); font-size: clamp(1rem, 1.8vw, 1.375rem); font-weight: 700; letter-spacing: -0.02em; opacity: 0.85; }
+/* Logos rendered as one-colour silhouettes so mixed brand colours read as a single strip. */
+.hero-sponsors img { display: block; height: 1.1em; width: auto; filter: brightness(0) invert(1); }
+.hero-sponsors li[data-wordmark] img { height: 1.7em; }
+:root[data-theme="light"] .hero-sponsors img { filter: brightness(0); }
 .section { padding-block: var(--section-space); }
 h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 650; line-height: 1.1; letter-spacing: -0.045em; text-wrap: balance; }
 .section-head { display: grid; justify-items: start; gap: 0.875rem; }
@@ -215,7 +223,7 @@ h3 { font-size: 1.25rem; line-height: 1.4; font-weight: 600; letter-spacing: -0.
 .timeline::before, .timeline::after { content: ""; position: absolute; top: calc(0.5rem - 1px); left: 0.5rem; right: calc((100% - (var(--timeline-count) - 1) * var(--timeline-gap)) / var(--timeline-count) - 0.5rem); height: 2px; border-radius: 1px; }
 .timeline::before { background: var(--line); }
 /* The drawn line runs through the milestone colours; clip-path reveals it without squashing the gradient. */
-.timeline::after { background: linear-gradient(90deg, var(--green), var(--red), var(--blue), var(--purple), var(--pink), var(--amber)); clip-path: inset(0 100% 0 0); transition: clip-path var(--timeline-duration) linear; }
+.timeline::after { background: linear-gradient(90deg, var(--green), var(--red), var(--blue), var(--purple), var(--orange), var(--pink), var(--amber)); clip-path: inset(0 100% 0 0); transition: clip-path var(--timeline-duration) linear; }
 .timeline[data-revealed="true"]::after { clip-path: inset(0); }
 .timeline li { position: relative; z-index: 1; padding-top: 2rem; }
 .timeline-dot { position: absolute; top: 0; left: 0; width: 1rem; height: 1rem; border: 2px solid var(--line); border-radius: 50%; background: var(--paper); transition: background-color 200ms ease, border-color 200ms ease, box-shadow 400ms ease; transition-delay: calc(var(--i) * var(--timeline-step)); }
@@ -306,7 +314,7 @@ h3 { font-size: 1.25rem; line-height: 1.4; font-weight: 600; letter-spacing: -0.
   .event-details { grid-template-columns: repeat(2, 1fr); }
   .timeline { grid-template-columns: 1fr; gap: 1.75rem; padding-left: 2.25rem; }
   .timeline::before, .timeline::after { top: 0.5rem; bottom: 0; left: calc(0.5rem - 1px); right: auto; width: 2px; height: auto; }
-  .timeline::after { background: linear-gradient(180deg, var(--green), var(--red), var(--blue), var(--purple), var(--pink), var(--amber)); clip-path: inset(0 0 100% 0); }
+  .timeline::after { background: linear-gradient(180deg, var(--green), var(--red), var(--blue), var(--purple), var(--orange), var(--pink), var(--amber)); clip-path: inset(0 0 100% 0); }
   .timeline li { padding-top: 0; }
   .timeline li:last-child::before { content: ""; position: absolute; top: 1rem; bottom: 0; left: -2.25rem; width: 1rem; background: var(--paper); }
   .timeline-dot { left: -2.25rem; }
