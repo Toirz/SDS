@@ -1,5 +1,7 @@
-// Abstract, decorative artwork for the track panels. Standard is calm and ordered;
-// Advanced is dense and layered so the step up in difficulty reads at a glance.
+// Decorative product-style mockups for the track panels, each sketching its problem statement.
+// Beginner: a fuel purchasing plan for 12 vessels built on price history and an uncertain forecast.
+// Advanced: an AI answer engine that retrieves from the ATLAS data and cites its evidence.
+// The real problem statements are given to screen readers by the panel; everything here is aria-hidden.
 
 // Small deterministic PRNG so server and client render identical artwork.
 function seeded(seed: number) {
@@ -10,85 +12,115 @@ function seeded(seed: number) {
   };
 }
 
-export function StandardArt() {
-  const size = 64;
-  const gap = 16;
-  const x0 = 128;
-  const y0 = 70;
-  const filled: Record<string, { fill: string; opacity: number }> = {
-    "2-0": { fill: "var(--yellow)", opacity: 1 },
-    "1-1": { fill: "var(--yellow)", opacity: 1 },
-    "2-1": { fill: "var(--amber)", opacity: 0.55 },
-    "0-2": { fill: "var(--yellow)", opacity: 1 },
-    "1-2": { fill: "var(--amber)", opacity: 0.55 },
-    "2-2": { fill: "var(--amber)", opacity: 0.3 },
-  };
-  const cell = (row: number, col: number) => ({ x: x0 + col * (size + gap), y: y0 + row * (size + gap) });
-  const steps = [[2, 0], [1, 1], [0, 2]].map(([r, c]) => cell(r, c));
-  const ring = cell(0, 3);
+const point = (x: number, y: number) => `${x.toFixed(1)} ${y.toFixed(1)}`;
 
+// --- Beginner: fuel purchasing ---
+const CHART = { left: 4, today: 262, right: 416, base: 118 };
+const fuelRandom = seeded(11);
+const HISTORY_POINTS = 26; // about six months of weekly prices
+const history = (() => {
+  let level = 0.55;
+  return Array.from({ length: HISTORY_POINTS }, (_, i) => {
+    level = Math.min(0.88, Math.max(0.15, level + (fuelRandom() - 0.5) * 0.16 + Math.sin(i / 2.6) * 0.045));
+    return { x: CHART.left + (i / (HISTORY_POINTS - 1)) * (CHART.today - CHART.left), y: CHART.base - 8 - level * 96 };
+  });
+})();
+// Buy at the three cheapest dips (lowest price = largest y), spaced apart so each reads as its own purchase.
+const buys = history
+  .filter((p, i) => i > 0 && i < history.length - 1 && p.y > history[i - 1].y && p.y > history[i + 1].y)
+  .sort((a, b) => b.y - a.y)
+  .reduce<typeof history>((picked, p) => (picked.length < 3 && picked.every((q) => Math.abs(q.x - p.x) > 30) ? [...picked, p] : picked), []);
+const last = history[history.length - 1];
+const FORECAST_STEPS = 8;
+const forecast = Array.from({ length: FORECAST_STEPS + 1 }, (_, i) => {
+  const t = i / FORECAST_STEPS;
+  return { x: last.x + t * (CHART.right - last.x), y: last.y - t * 8 + Math.sin(t * 5) * 3, spread: 3 + t * 38 };
+});
+const band = `M${forecast.map((p) => point(p.x, p.y - p.spread)).join("L")}L${[...forecast].reverse().map((p) => point(p.x, p.y + p.spread)).join("L")}Z`;
+const historyLine = `M${history.map((p) => point(p.x, p.y)).join("L")}`;
+
+const VESSELS = [
+  { name: "Vessel 01", level: 82, action: "Hold" },
+  { name: "Vessel 05", level: 47, action: "Buy at dip" },
+  { name: "Vessel 08", level: 14, action: "Buy now", short: true },
+  { name: "Vessel 11", level: 66, action: "Hold" },
+];
+
+export function BeginnerArt() {
   return (
-    <svg className="track-art" viewBox="0 0 560 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      {[0, 1, 2].flatMap((row) => [0, 1, 2, 3].map((col) => {
-        const { x, y } = cell(row, col);
-        const fill = filled[`${row}-${col}`];
-        return fill
-          ? <rect key={`${row}-${col}`} x={x} y={y} width={size} height={size} rx="10" fill={fill.fill} fillOpacity={fill.opacity} />
-          : <rect key={`${row}-${col}`} x={x + 0.5} y={y + 0.5} width={size - 1} height={size - 1} rx="10" fill="none" stroke="currentColor" strokeOpacity="0.14" />;
-      }))}
-      <circle cx={ring.x + size / 2} cy={ring.y + size / 2} r="22" fill="none" stroke="var(--yellow)" strokeWidth="6" />
-      <path d={`M${steps.map(({ x, y }) => `${x + size / 2} ${y + size / 2}`).join("L")}L${ring.x + size / 2 - 22} ${ring.y + size / 2}`} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      {steps.map(({ x, y }) => <circle key={x} cx={x + size / 2} cy={y + size / 2} r="6" fill="var(--mock-bg)" stroke="currentColor" strokeWidth="2.5" />)}
-    </svg>
+    <div className="mock">
+      <p className="mock-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M7 8h4" /><path d="M14 10h2a2 2 0 0 1 2 2v4a1.5 1.5 0 0 0 3 0V8l-3-3" stroke="var(--yellow)" /></svg>
+        Fuel Purchasing Plan
+      </p>
+      <p className="mock-tags"><span>12 vessels</span><span>6 months of prices</span><span data-accent>Price forecast</span></p>
+      <div className="mock-chart">
+        <p className="mock-legend"><span><i />Fuel price history</span><span><i data-band />Forecast range</span><span><i data-dot />Purchase</span></p>
+        <svg viewBox="0 0 420 124">
+          <path d={`M${CHART.left} ${CHART.base}H${CHART.right}`} stroke="currentColor" strokeOpacity="0.14" />
+          <path d={band} fill="var(--amber)" fillOpacity="0.18" />
+          <path d={`M${forecast.map((p) => point(p.x, p.y)).join("L")}`} fill="none" stroke="currentColor" strokeOpacity="0.55" strokeWidth="2" strokeDasharray="4 5" strokeLinecap="round" />
+          <path d={`M${CHART.today} 4V${CHART.base}`} stroke="currentColor" strokeOpacity="0.25" strokeDasharray="2 4" />
+          <path d={`${historyLine}L${point(last.x, CHART.base)}L${point(CHART.left, CHART.base)}Z`} fill="var(--yellow)" fillOpacity="0.14" />
+          <path d={historyLine} fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinejoin="round" strokeLinecap="round" />
+          {buys.map((p) => <circle key={p.x} cx={p.x} cy={p.y} r="6" fill="var(--yellow)" stroke="var(--mock-bg)" strokeWidth="2.5" />)}
+          <circle cx={last.x} cy={last.y} r="4.5" fill="var(--mock-bg)" stroke="currentColor" strokeWidth="2.25" />
+        </svg>
+      </div>
+      <table className="mock-table">
+        <thead><tr><th>Vessel</th><th>Fuel on board</th><th>Plan</th></tr></thead>
+        <tbody>
+          {VESSELS.map((vessel) => (
+            <tr key={vessel.name}>
+              <td>{vessel.name}</td>
+              <td><span className="mock-gauge" data-short={vessel.short}><i style={{ width: `${vessel.level}%` }} /></span>{vessel.level}%</td>
+              <td><span className="mock-pill" data-accent={vessel.action !== "Hold"} data-short={vessel.short}>{vessel.action}</span></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
-const CX = 280;
-const CY = 190;
-const random = seeded(2027);
-const RINGS = [56, 100, 146, 194];
-const nodes = RINGS.flatMap((r, ring) =>
-  Array.from({ length: 4 + ring * 2 }, (_, i) => {
-    const angle = (i / (4 + ring * 2)) * Math.PI * 2 + random() * 0.6;
-    return { x: CX + Math.cos(angle) * r, y: CY + Math.sin(angle) * r, on: random() < 0.28 };
-  }),
-);
-const edges = nodes.flatMap((node, i) =>
-  [0, 1].map(() => nodes[Math.floor(random() * nodes.length)]).filter((other) => other !== node).map((other) => `M${node.x.toFixed(1)} ${node.y.toFixed(1)}L${other.x.toFixed(1)} ${other.y.toFixed(1)}`).slice(0, i % 3 === 0 ? 2 : 1),
-);
-const highlight = [0, 5, 13, 22, 9, 2].map((i) => nodes[i % nodes.length]);
-const dust = Array.from({ length: 70 }, () => ({ x: random() * 560, y: random() * 360, r: 0.8 + random() * 1.6 }));
-
+// --- Advanced: grounded, culturally aware question answering ---
 export function AdvancedArt() {
   return (
-    <svg className="track-art" viewBox="0 0 560 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      {dust.map((d, i) => <circle key={i} cx={d.x} cy={d.y} r={d.r} fill="currentColor" fillOpacity="0.22" />)}
-      <g className="track-art-orbit">
-        {RINGS.map((r, i) => (
-          <circle key={r} cx={CX} cy={CY} r={r} fill="none" stroke="currentColor" strokeOpacity="0.14" strokeDasharray={i % 2 ? "3 7" : undefined} />
-        ))}
-        <path d={edges.join("")} stroke="currentColor" strokeOpacity="0.16" fill="none" />
-        <path d={`M${highlight.map(({ x, y }) => `${x.toFixed(1)} ${y.toFixed(1)}`).join("L")}`} fill="none" stroke="var(--yellow)" strokeWidth="2.5" strokeLinejoin="round" />
-        {nodes.map((node, i) => (
-          <rect
-            key={i}
-            x={node.x - 5}
-            y={node.y - 5}
-            width="10"
-            height="10"
-            rx="2"
-            transform={`rotate(45 ${node.x.toFixed(1)} ${node.y.toFixed(1)})`}
-            fill={node.on || highlight.includes(node) ? "var(--yellow)" : "var(--mock-bg)"}
-            stroke={node.on || highlight.includes(node) ? "var(--yellow)" : "currentColor"}
-            strokeOpacity={node.on || highlight.includes(node) ? 1 : 0.5}
-            strokeWidth="1.5"
-          />
-        ))}
-      </g>
-      {[{ s: 104, a: 12, f: "var(--amber)", o: 0.28 }, { s: 78, a: 34, f: "var(--yellow)", o: 0.4 }, { s: 52, a: 58, f: "var(--yellow)", o: 0.85 }].map(({ s, a, f, o }) => (
-        <rect key={s} x={CX - s / 2} y={CY - s / 2} width={s} height={s} rx="10" fill={f} fillOpacity={o} transform={`rotate(${a} ${CX} ${CY})`} />
-      ))}
-      <rect x={CX - 26} y={CY - 26} width="52" height="52" rx="10" fill="none" stroke="currentColor" strokeOpacity="0.5" transform={`rotate(-20 ${CX} ${CY})`} />
-    </svg>
+    <div className="mock">
+      <p className="mock-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18" /><circle cx="18.5" cy="5.5" r="2.5" fill="var(--yellow)" stroke="none" /></svg>
+        ATLAS Answer Engine
+      </p>
+      <p className="mock-tags"><span>Seed prompts</span><span>ATLAS Data catalogue</span><span data-accent>Grounded</span></p>
+      <p className="mock-ask">What is a polite gift to bring to a Hari Raya open house?</p>
+      <div className="mock-answer">
+        <span className="mock-avatar"><svg viewBox="0 0 24 24"><path d="M12 2C13 8 16 11 22 12C16 13 13 16 12 22C11 16 8 13 2 12C8 11 11 8 12 2Z" fill="#111111" /></svg></span>
+        <p>A box of festive cookies or kuih is a thoughtful choice. Greet your host with “Selamat Hari Raya”<sup>1</sup> and avoid gifts containing alcohol<sup>2</sup>.</p>
+      </div>
+      <p className="mock-sources">
+        <span><i>1</i>Festive customs</span>
+        <span><i>2</i>Visiting etiquette</span>
+      </p>
+    </div>
+  );
+}
+
+// Props that break out of the Advanced frame: a retrieved dataset, the question bar and a few sparkles.
+export function AdvancedSpill() {
+  const sparkle = "M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z";
+  return (
+    <div className="track-spill" aria-hidden="true">
+      <svg className="track-spill-dataset" viewBox="0 0 44 54">
+        <path d="M4 1h26l13 13v35a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V5a4 4 0 0 1 4-4Z" fill="var(--yellow)" />
+        <path d="M30 1v9a4 4 0 0 0 4 4h9" fill="var(--amber)" />
+        <g fill="#111111" fillOpacity="0.55"><rect x="7" y="22" width="24" height="3.5" rx="1.75" /><rect x="7" y="30" width="30" height="3.5" rx="1.75" /><rect x="7" y="38" width="18" height="3.5" rx="1.75" /></g>
+      </svg>
+      <svg className="track-spill-sparkle" viewBox="0 0 24 24"><path d={sparkle} fill="var(--yellow)" /></svg>
+      <svg className="track-spill-sparkle track-spill-sparkle-small" viewBox="0 0 24 24"><path d={sparkle} fill="currentColor" fillOpacity="0.5" /></svg>
+      <p className="track-spill-prompt">
+        <span>Ask a real-world question…</span>
+        <i><svg viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M6 11l6-6 6 6" /></svg></i>
+      </p>
+    </div>
   );
 }

@@ -11,7 +11,7 @@ Edit `src/features/event/config.ts`. `EventConfig` in `types.ts` checks the requ
 | `hero` | Tagline used by the promo video; the typed hero title uses `name` and highlights `year` |
 | `dates` | Registration window and event start/end used by the hero, overview and tests; the full schedule lives in the `dates` constant at the top of `config.ts` |
 | `venue`, `audience`, `teamSize`, `entryFee` | Overview facts |
-| `prizeAmount`, `prizes` | Total cash prize and the participant perks list (`intro` is the promo video's prize headline) |
+| `prizeAmount`, `prizes` | Total cash prize, per-category cash awards shown on the site (`categories`), and the perks list (`perks` and `intro` are used only by the promo video) |
 | `overview`, `milestones` | Overview heading and the key dates timeline |
 | `tracks` | Track heading and Category A/B names, and levels for the track panels (descriptions are used by the promo video) |
 | `faq` | Factual questions and answers |

@@ -13,7 +13,7 @@
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "node --test src/features/event/registration.test.ts"
+    "test": "node --test src/features/event/registration.test.ts src/features/event/components/prize-particles.test.ts"
   },
   "dependencies": {
     "next": "16.4.0",

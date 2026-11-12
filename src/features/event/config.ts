@@ -41,6 +41,14 @@ export const event: EventConfig = {
       { title: "Novelty cheques", detail: "For the top 3 teams in each track" },
       { title: "Finale meals", detail: "Lunch and dinner for participants on finale day" },
     ],
+    categories: ["Category A", "Category B"].map((name) => ({
+      name,
+      awards: [
+        { place: "1st Prize", amount: "600" },
+        { place: "2nd Prize", amount: "300" },
+        { place: "3rd Prize", amount: "150" },
+      ],
+    })),
   },
   contactEmail: "statistics.society@u.nus.edu",
   instagramUrl: "https://www.instagram.com/nus.sds/",
@@ -65,17 +73,17 @@ export const event: EventConfig = {
   tracks: {
     title: "Two tracks. Find your starting point.",
     items: [
-      { name: "Category A", level: "Standard", description: "New to datathons? Start here. Explore a real-world dataset, build your confidence and put your fundamentals to work." },
-      { name: "Category B", level: "Advanced", description: "Ready for a deeper challenge? Take on a more demanding dataset and push your analytical and modelling skills further." },
+      { name: "Category A", level: "Beginner", description: "New to datathons? Start here. Explore a real-world dataset, build your confidence and put your fundamentals to work.", challenge: "How can a shipping company use historical fuel prices, vessel information and operational constraints to make reliable fuel purchasing decisions across 12 vessels, while accounting for uncertain future fuel prices and physical fuel shortages? Participants analyse six months of historical fuel prices, estimate short-term future prices and develop a fuel purchasing plan that balances cost efficiency with operational reliability." },
+      { name: "Category B", level: "Advanced", description: "Ready for a deeper challenge? Take on a more demanding dataset and push your analytical and modelling skills further.", challenge: "Can you build an AI system that answers real-world questions accurately and in a culturally appropriate way? Using the ATLAS Arena Seed Prompt Dataset and datasets from the ATLAS Data catalogue, the system should retrieve appropriate knowledge, generate grounded responses and provide reliable evidence." },
     ],
   },
   milestones: [
     { label: "Registration opens", date: dates.registrationOpens, description: "Sign up as a team, or on your own using the Team Finder option." },
-    { label: "Registration closes", date: dates.registrationDeadline, description: "Last day to register, by 11:59 pm." },
+    { label: "Registration closes", date: dates.registrationDeadline, description: "Last day to register, by 23:59." },
     { label: "Online workshop 1", date: dates.workshopOne, description: "Useful libraries and modelling approaches for real-time data analysis and prediction." },
     { label: "Online workshop 2", date: dates.workshopTwo, description: "Working with frontier AI models: their limitations and how to address them." },
     { label: "Opening ceremony", date: dates.start, description: "At NUS. Problem statements are released, followed by an in-person workshop." },
-    { label: "Submission deadline", date: dates.submissionDeadline, description: "Submit your code and supporting materials online by 11:59 pm." },
+    { label: "Submission deadline", date: dates.submissionDeadline, description: "Submit your code and supporting materials online by 23:59." },
     { label: "Finale and closing", date: dates.end, description: "At NUS. Finalists present to the judges, followed by the prize presentation." },
   ],
   faq: [
@@ -83,7 +91,7 @@ export const event: EventConfig = {
     { question: "Is there a participation fee?", answer: "No. The competition is free of charge for all participants." },
     { question: "How big can a team be?", answer: "Teams have 3 to 5 members, and each team must include at least one NUS student." },
     { question: "What if I don't have a full team?", answer: "Sign up with fewer than three members and select the Team Finder option on the registration form, then complete the Team Finder form. The organisers will assign you to a team." },
-    { question: "Do I need experience with data?", answer: "Beginners and experienced participants are welcome. Category A is the standard track and Category B is advanced. Proficiency in Python and libraries such as pandas, NumPy, seaborn and Matplotlib is recommended, and the workshops help you prepare." },
+    { question: "Do I need experience with data?", answer: "Beginners and experienced participants are welcome. Category A is the beginner track and Category B is advanced. Proficiency in Python and libraries such as pandas, NumPy, seaborn and Matplotlib is recommended, and the workshops help you prepare." },
     { question: "When and where does the event take place?", answer: `Online workshops run on ${formatEventDate(dates.workshopOne)} and ${formatEventDate(dates.workshopTwo)}. The opening ceremony is at NUS on ${formatEventDate(dates.start)}, submissions are due online on ${formatEventDate(dates.submissionDeadline)}, and the finale is at NUS on ${formatEventDate(dates.end)}.` },
     { question: "How many times can we submit?", answer: "There is no submission limit. Only your team's latest submission before the deadline is considered for judging." },
     { question: "Who owns our work and the datasets?", answer: "All intellectual property submitted for the competition belongs to the dataset partner. Datasets are for competition use only, and sharing code or data outside your team is not permitted. Participants are required to sign a non-disclosure agreement." },
